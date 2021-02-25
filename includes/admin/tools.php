@@ -893,6 +893,15 @@ function edd_tools_import_export_display() {
 								<td class="edd-import-preview-field"><?php _e( '- select field to preview data -', 'easy-digital-downloads' ); ?></td>
 							</tr>
 							<tr>
+								<td><?php _e( 'Download Files Names', 'easy-digital-downloads' ); ?></td>
+								<td>
+									<select name="edd-import-field[files_names]" class="edd-import-csv-column" data-field="Files Names">
+										<option value=""><?php _e( '- Ignore this field -', 'easy-digital-downloads' ); ?></option>
+									</select>
+								</td>
+								<td class="edd-import-preview-field"><?php _e( '- select field to preview data -', 'easy-digital-downloads' ); ?></td>
+							</tr>
+							<tr>
 								<td><?php _e( 'File Download Limit', 'easy-digital-downloads' ); ?></td>
 								<td>
 									<select name="edd-import-field[download_limit]" class="edd-import-csv-column" data-field="File Download Limit">
