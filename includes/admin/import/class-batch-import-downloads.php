@@ -40,6 +40,7 @@ class EDD_Batch_Downloads_Import extends EDD_Batch_Import {
 			'post_excerpt'   => '',
 			'price'          => '',
 			'files'          => '',
+			'files_names'    => '',
 			'categories'     => '',
 			'tags'           => '',
 			'sku'            => '',
@@ -198,6 +199,15 @@ class EDD_Batch_Downloads_Import extends EDD_Batch_Import {
 
 				}
 
+				// setup file names if any
+				if( ! empty( $this->field_mapping['files_names'] ) && ! empty( $row[ $this->field_mapping['files_names'] ] ) ) {
+
+					$names = $this->convert_file_string_to_array( $row[ $this->field_mapping['files_names'] ] );
+
+					$this->set_files_names( $download_id, $names );
+
+				}
+
 				// Product Image
 				if( ! empty( $this->field_mapping['featured_image'] ) && ! empty( $row[ $this->field_mapping['featured_image'] ] ) ) {
 
@@ -316,7 +326,7 @@ class EDD_Batch_Downloads_Import extends EDD_Batch_Import {
 	 * @since 2.6
 	 * @return void
 	 */
-	private function set_files( $download_id = 0, $files = array() ) {
+	private function set_files( $download_id = 0, $files = array(), $names = array() ) {
 
 		if( ! empty( $files ) ) {
 
@@ -351,6 +361,27 @@ class EDD_Batch_Downloads_Import extends EDD_Batch_Import {
 			}
 
 			update_post_meta( $download_id, 'edd_download_files', $download_files );
+
+		}
+
+	}
+
+	/**
+	 * Set up and store the file downloads names if set
+	 *
+	 * @since 2.6
+	 * @return void
+	 */
+	private function set_files_names( $download_id = 0, $names = array() ) {
+
+		if( ! empty( $names ) ) {
+
+			$files = get_post_meta( $download_id, 'edd_download_files', true );
+			foreach( $files as $key => $file ) {
+				$files[$key]['name'] = $names[ $key - 1];
+			}
+
+			update_post_meta( $download_id, 'edd_download_files', $files );
 
 		}
 
