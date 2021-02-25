@@ -326,7 +326,7 @@ class EDD_Batch_Downloads_Import extends EDD_Batch_Import {
 	 * @since 2.6
 	 * @return void
 	 */
-	private function set_files( $download_id = 0, $files = array(), $names = array() ) {
+	private function set_files( $download_id = 0, $files = array() ) {
 
 		if( ! empty( $files ) ) {
 
